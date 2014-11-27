@@ -1,12 +1,15 @@
 {
-	"name": "gate17",
-	"author": "kaustavha",
-	"devDependencies": {
-		"gulp": "latest",
-		"gulp-util": "latest",
-		"gulp-coffee": "latest",
-		"gulp-jade": "latest",
-		"gulp-stylus": "latest",
-		"gulp-rename": "latest"
-	}
+  "name": "gate17",
+  "author": "kaustavha",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "gulp-coffee": "latest",
+    "gulp-jade": "latest",
+    "gulp-stylus": "latest",
+    "gulp-rename": "latest"
+  },
+  "dependencies": {
+    "gulp-livereload": "^2.1.1"
+  }
 }
