@@ -3,7 +3,14 @@ html(lang="en")
   head
     title="title"
     link(rel='stylesheet', href='./assets/styles.css')
+    script(src="//localhost:35729/livereload.js")
   body
-    #flippers
+    #scene
+      #flippers
+    input#play_btn(type="submit", value="play")
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenMax.min.js")
     script(src='./assets/scripts.js')
+    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/plugins/CSSPlugin.min.js")
+    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/easing/EasePack.min.js")
+    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenLite.min.js")

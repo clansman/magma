@@ -1,10 +1,10 @@
-var SIZE, deg, flip, fliptiles, height, imagearray, liftTile, setup, tilearray, width;
+var SIZE, animate, boxes, deg, flip, flippers, fliptiles, getRandom, height, imagearray, liftTile, scene, setup, tilearray, timeline, width;
 
-height = 10;
+height = 5;
 
-width = 10;
+width = 5;
 
-SIZE = 50;
+SIZE = 100;
 
 deg = 0;
 
@@ -13,7 +13,7 @@ tilearray = [];
 imagearray = ["url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)", "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)", "url(http://www.creoglassonline.co.uk/ekmps/shops/bohdan/images/black-cat-face-[2]-10382-p.jpg)"];
 
 setup = function() {
-  var $tile, entity, flippers, tile, x, y, _results;
+  var $back, $front, back, entity, flippers, front, tile, x, y, _results;
   flippers = document.getElementById("flippers");
   flippers.style.height = SIZE * height + "px";
   flippers.style.width = SIZE * width + "px";
@@ -23,11 +23,23 @@ setup = function() {
     x = 0;
     while (x < width) {
       tile = document.createElement("div");
+      front = document.createElement("div");
+      back = document.createElement("div");
       tile.className = "tile";
       tile.id = "tile";
       tile.style.width = SIZE + "px";
       tile.style.height = SIZE + "px";
-      flippers.appendChild(tile);
+      $front = $(front);
+      $front.addClass('front');
+      $front[0].style.backgroundPosition = "-" + x * SIZE + "px -" + y * SIZE + "px";
+      $front[0].style.backgroundImage = imagearray[0];
+      $back = $(back);
+      $back.addClass('back');
+      $back[0].style.backgroundPosition = "-" + x * SIZE + "px -" + y * SIZE + "px";
+      $back[0].style.backgroundImage = imagearray[2];
+      $(tile).append($front);
+      $(tile).append($back);
+      $(flippers).append(tile);
       entity = {
         element: tile,
         x: x * SIZE,
@@ -35,11 +47,7 @@ setup = function() {
       };
       tile.style.left = entity.x + "px";
       tile.style.top = entity.y + "px";
-      tile.addEventListener("click", this.fliptiles.bind(this, entity));
-      $tile = $(tile);
-      $tile.hover($.proxy(liftTile, entity));
       tilearray.push(entity);
-      tile.style.backgroundPosition = "-" + x * SIZE + "px -" + y * SIZE + "px";
       x++;
     }
     _results.push(y++);
@@ -107,6 +115,94 @@ setup();
 
 window.i = 0;
 
+getRandom = function(max, min) {
+  return Math.floor(Math.random() * (1 + max - min) + min);
+};
+
+scene = $("#scene");
+
+flippers = $("#flippers");
+
+boxes = $("#flippers .tile");
+
+timeline = new TimelineLite();
+
+TweenLite.set(flippers, {
+  css: {
+    transformPerspective: 400,
+    perspective: 400,
+    transformStyle: "preserve-3d"
+  }
+});
+
+animate = function() {
+  timeline.fromTo(scene, .5, {
+    css: {
+      autoAlpha: 0
+    }
+  }, {
+    css: {
+      autoAlpha: 1
+    },
+    immediateRender: true
+  }).to(flippers, 0.5, {
+    css: {
+      rotationY: 30,
+      rotationX: 20
+    }
+  });
+  timeline.to(flippers, 0.1, {
+    css: {
+      className: '+=animated'
+    }
+  });
+  timeline.to(flippers, 0.5, {
+    css: {
+      z: -190
+    }
+  }, 'z');
+  boxes.each(function(index, element) {
+    return timeline.to(element, 0.4, {
+      css: {
+        z: getRandom(-100, 100)
+      }
+    }, "z");
+  });
+  timeline.to(flippers, 0.5, {
+    css: {
+      rotationX: 160,
+      rotationY: 20,
+      rotationZ: 180
+    },
+    transformStyle: "preserve-3d",
+    ease: Power2.easeOut
+  }, "+=0.2");
+  boxes.each(function(index, element) {
+    return timeline.to(element, 1, {
+      css: {
+        z: 0
+      }
+    }, "y");
+  });
+  timeline.to(flippers, 0.01, {
+    css: {
+      className: '-=animated'
+    }
+  }, "y");
+  timeline.to(flippers, 1, {
+    css: {
+      rotationX: 180,
+      rotationY: 0,
+      z: 0
+    },
+    ease: Power2.easeOut
+  }, "y");
+};
+
 setTimeout((function() {
-  return flip(44);
-}), 1000);
+  return animate();
+}), 500);
+
+$("#play_btn").click(function() {
+  return animate();
+});
