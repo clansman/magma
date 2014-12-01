@@ -32,7 +32,7 @@ p
   animation-duration 1s
   -webkit-animation-duration 1s
   // background-color #f60
-  transition border-width .2s
+  transition all .4s
   // transform scale(1,1)
   &.hoverable
     transition: all 500ms cubic-bezier(0.190, 1.000, 0.220, 1.000)
@@ -43,7 +43,7 @@ p
     transform translateY(-5px) scale(1.07, 1.07);
     z-index: 1
   &.hoverable.hovered2
-    box-shadow 0px 5px 9px 6px rgba(0, 0, 0, 0.05);
+    box-shadow 0px 5px 9px 6px rgba(0, 0, 0, 0.04);
     transform translateY(-2px) scale(1.05, 1.05);
     z-index: 1
   &.changingBackground
@@ -62,7 +62,8 @@ p
   right 0
   margin auto
   &.animated .tile
-    border 1px solid rgba(255,255,255,0.5) 
+    // border 1px solid rgba(255,255,255,0.5) 
+    box-shadow 0px 0px 40px 2px rgba(237, 140, 0, 0.4)
 @keyframes lift {
   0%  {
     box-shadow none

@@ -10,7 +10,7 @@ deg = 0;
 
 tilearray = [];
 
-imagearray = ["url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)", "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)", "url(http://www.creoglassonline.co.uk/ekmps/shops/bohdan/images/black-cat-face-[2]-10382-p.jpg)"];
+imagearray = ["url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)", "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)", "url(../img/cat-fliped.jpg)"];
 
 setup = function() {
   var $back, $front, back, entity, flippers, front, tile, x, y, _results;
@@ -138,6 +138,20 @@ TweenLite.set(flippers, {
 });
 
 animate = function() {
+  back.each(function(index, element) {
+    return timeline.to(element, 0.01, {
+      css: {
+        rotationY: -180
+      }
+    }, 'start');
+  });
+  timeline.to(flippers, 0.1, {
+    css: {
+      rotationY: 0,
+      rotationX: 0,
+      rotationZ: 0
+    }
+  }, 'start');
   timeline.fromTo(scene, .5, {
     css: {
       autoAlpha: 0
@@ -147,70 +161,63 @@ animate = function() {
       autoAlpha: 1
     },
     immediateRender: true
-  }).to(flippers, 0.5, {
+  }, 'fadeIn');
+  timeline.to(flippers, 0.5, {
     css: {
       rotationY: 30,
-      rotationX: 20
-    }
-  });
-  timeline.to(flippers, 0.1, {
-    css: {
+      rotationX: 20,
+      z: -150,
       className: '+=animated'
     }
-  });
-  timeline.to(flippers, 0.8, {
-    css: {
-      z: -150
-    }
-  }, 'z');
+  }, "z");
   boxes.each(function(index, element) {
-    return timeline.to(element, 0.8, {
+    return timeline.to(element, 0.5, {
       css: {
-        z: getRandom(-75, 75)
+        z: getRandom(-70, 70)
       }
     }, "z");
   });
-  timeline.to(flippers, 1, {
+  timeline.to(flippers, 0.8, {
     css: {
-      rotationX: 160,
-      rotationY: 20,
-      rotationZ: 180
-    },
-    ease: Power2.easeOut
-  }, "l");
+      rotationX: -160
+    }
+  }, "rotate");
   back.each(function(index, element) {
-    return timeline.to(element, 1, {
+    return timeline.to(element, 0.8, {
       css: {
-        rotationY: 180
+        rotationY: 0
       }
-    }, "l");
+    }, "rotate");
   });
   boxes.each(function(index, element) {
-    return timeline.to(element, 1, {
+    return timeline.to(element, 0.3, {
       css: {
         z: 0
       }
-    }, "y");
+    }, 'rotate+=0.5');
   });
-  timeline.to(flippers, 0.01, {
+  return timeline.to(flippers, 0.5, {
     css: {
+      rotationY: 0,
+      rotationX: -180,
+      z: 0,
       className: '-=animated'
     }
-  }, "y");
-  timeline.to(flippers, 1, {
-    css: {
-      rotationX: 180,
-      rotationY: 0,
-      z: 0
-    },
-    ease: Power2.easeOut
-  }, "y");
+  }, "flatten");
 };
 
 setTimeout((function() {
   return animate();
 }), 500);
 
+$("#reverse_btn").click(function() {
+  return timeline.reverse();
+});
+
+$("#restart_btn").click(function() {
+  return timeline.restart('z');
+});
+
 $("#play_btn").click(function() {
-  return timeline.restart();
+  return timeline.play();
 });

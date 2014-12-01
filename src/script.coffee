@@ -6,7 +6,7 @@ tilearray = []
 imagearray = [
   "url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)",
   "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)",
-  "url(http://www.creoglassonline.co.uk/ekmps/shops/bohdan/images/black-cat-face-[2]-10382-p.jpg)"
+  "url(../img/cat-fliped.jpg)"
 ]
 
 setup = ->
@@ -17,7 +17,6 @@ setup = ->
 
   while y < height
     x = 0
-
     while x < width
       tile = document.createElement("div")
       front = document.createElement("div")
@@ -118,6 +117,7 @@ window.i = 0
 #   return
 getRandom = (max, min) ->
   Math.floor Math.random() * (1 + max - min) + min
+
 scene = $("#scene")
 flippers = $("#flippers")
 boxes = $("#flippers .tile")
@@ -132,7 +132,21 @@ TweenLite.set flippers,
     transformStyle: "preserve-3d"
 
 animate = ->
-  timeline.fromTo(scene, .5,
+
+  back.each (index, element) ->
+    timeline.to element, 0.01,
+      css:
+        rotationY:-180
+    , 'start'
+
+  timeline.to flippers, 0.1,
+    css:
+      rotationY:0
+      rotationX:0
+      rotationZ:0
+  , 'start'
+
+  timeline.fromTo scene, .5,
     css:
       autoAlpha: 0
   ,
@@ -140,78 +154,54 @@ animate = ->
       autoAlpha: 1
 
     immediateRender: true
-  ).to(flippers, 0.5,
+  , 'fadeIn'
+
+  timeline.to flippers, 0.5,
     css:
       rotationY: 30
       rotationX: 20
-  )
-
-  timeline.to(flippers, 0.1,
-    css:
-      className:'+=animated'
-    )
-
-  timeline.to(flippers, 0.8,
-    css:
-      z:-150
-  ,
-    'z'
-    )
+      z: -150   
+      className: '+=animated'
+  , "z"
 
   boxes.each (index, element) ->
-    timeline.to element, 0.8,
+    timeline.to element, 0.5,
       css:
-        z: getRandom(-75, 75)
+        z: getRandom(-70, 70)
     , "z"
 
-  timeline
-  .to(flippers, 1,
+  timeline.to flippers, 0.8,
     css:
-      rotationX: 160
-      rotationY: 20
-      rotationZ: 180
-    ease: Power2.easeOut
-  , "l")
+      rotationX: -160
+      # rotationY: 0
+      # rotationZ: 180
+  , "rotate"
 
   back.each (index, element) ->
-    timeline.to element, 1,
+    timeline.to element, 0.8,
       css:
-        rotationY: 180
-    , "l"
+        rotationY: 0
+    , "rotate"
 
   boxes.each (index, element) ->
-    timeline.to element, 1,
+    timeline.to element, 0.3,
       css:
         z: 0
-    , "y"
+    , 'rotate+=0.5'
 
-  timeline.to(flippers, 0.01,
-    css:
-      className:'-=animated'
-  , "y")
-
-  timeline
-  .to(flippers, 1,
-    css:
-      rotationX: 180
-      rotationY: 0
-      z:0
-    ease: Power2.easeOut
-  , "y")
-
-
-  # boxes.each (index, element) ->
-  #   timeline.to element, 0,
-  #     css:
-  #       transform: 'none'
-  #   , "x"
-
-  # .to flippers, 0.5,
+  # timeline.to flippers, 0.3,
   #   css:
-  #     rotationZ: 180
-  #     z: -10
-  # $('#flippers').removeClass 'animated'
-  return
+  # , "rotate+=0.5"
+
+  timeline.to flippers, 0.5,
+    css:
+      rotationY: 0
+      rotationX: -180
+      z:0
+      className:'-=animated'
+  , "flatten"
+
+
 setTimeout (->
   animate()
   ), 500
@@ -239,5 +229,11 @@ setTimeout (->
 #     timeline.progress ui.value / 100
 #     return
 
+$("#reverse_btn").click ->
+  timeline.reverse()
+
+$("#restart_btn").click ->
+  timeline.restart('z')
+
 $("#play_btn").click ->
-  timeline.restart()
+  timeline.play()

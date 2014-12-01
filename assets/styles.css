@@ -31,7 +31,7 @@ p {
   position: absolute;
   animation-duration: 1s;
   -webkit-animation-duration: 1s;
-  transition: border-width 0.2s;
+  transition: all 0.4s;
 }
 .tile.hoverable {
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -42,7 +42,7 @@ p {
   z-index: 1;
 }
 .tile.hoverable.hovered2 {
-  box-shadow: 0px 5px 9px 6px rgba(0,0,0,0.05);
+  box-shadow: 0px 5px 9px 6px rgba(0,0,0,0.04);
   transform: translateY(-2px) scale(1.05, 1.05);
   z-index: 1;
 }
@@ -64,7 +64,7 @@ p {
   margin: auto;
 }
 #flippers.animated .tile {
-  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 40px 2px rgba(237,140,0,0.4);
 }
 @-moz-keyframes lift {
   0% {
