@@ -4,9 +4,9 @@ SIZE = 100
 deg = 0
 tilearray = []
 imagearray = [
-  "url(../img/FY7A4025-Edit-Edit.jpg)",
+  "url(./img/FY7A4025-Edit-Edit.jpg)",
   "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)",
-  "url(../img/cat-fliped.jpg)"
+  "url(./img/cat-fliped.jpg)"
 ]
 
 setup = ->
