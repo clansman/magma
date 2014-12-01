@@ -1,4 +1,4 @@
-var SIZE, animate, boxes, deg, flip, flippers, fliptiles, getRandom, height, imagearray, liftTile, scene, setup, tilearray, timeline, width;
+var SIZE, animate, back, boxes, deg, flip, flippers, fliptiles, getRandom, height, imagearray, liftTile, scene, setup, tilearray, timeline, width;
 
 height = 5;
 
@@ -125,6 +125,8 @@ flippers = $("#flippers");
 
 boxes = $("#flippers .tile");
 
+back = $("#flippers .back");
+
 timeline = new TimelineLite();
 
 TweenLite.set(flippers, {
@@ -156,27 +158,33 @@ animate = function() {
       className: '+=animated'
     }
   });
-  timeline.to(flippers, 0.5, {
+  timeline.to(flippers, 0.8, {
     css: {
-      z: -190
+      z: -150
     }
   }, 'z');
   boxes.each(function(index, element) {
-    return timeline.to(element, 0.4, {
+    return timeline.to(element, 0.8, {
       css: {
-        z: getRandom(-100, 100)
+        z: getRandom(-75, 75)
       }
     }, "z");
   });
-  timeline.to(flippers, 0.5, {
+  timeline.to(flippers, 1, {
     css: {
       rotationX: 160,
       rotationY: 20,
       rotationZ: 180
     },
-    transformStyle: "preserve-3d",
     ease: Power2.easeOut
-  }, "+=0.2");
+  }, "l");
+  back.each(function(index, element) {
+    return timeline.to(element, 1, {
+      css: {
+        rotationY: 180
+      }
+    }, "l");
+  });
   boxes.each(function(index, element) {
     return timeline.to(element, 1, {
       css: {
@@ -204,5 +212,5 @@ setTimeout((function() {
 }), 500);
 
 $("#play_btn").click(function() {
-  return animate();
+  return timeline.restart();
 });

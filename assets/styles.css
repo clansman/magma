@@ -64,7 +64,7 @@ p {
   margin: auto;
 }
 #flippers.animated .tile {
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.5);
 }
 @-moz-keyframes lift {
   0% {

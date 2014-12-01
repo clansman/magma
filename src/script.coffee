@@ -121,6 +121,7 @@ getRandom = (max, min) ->
 scene = $("#scene")
 flippers = $("#flippers")
 boxes = $("#flippers .tile")
+back = $("#flippers .back")
 # slider = $("#slider")
 # play_btn = $("#play_btn").button()
 timeline = new TimelineLite()
@@ -150,28 +151,33 @@ animate = ->
       className:'+=animated'
     )
 
-  timeline.to(flippers, 0.5,
+  timeline.to(flippers, 0.8,
     css:
-      z:-190
+      z:-150
   ,
     'z'
     )
 
   boxes.each (index, element) ->
-    timeline.to element, 0.4,
+    timeline.to element, 0.8,
       css:
-        z: getRandom(-100, 100)
+        z: getRandom(-75, 75)
     , "z"
 
   timeline
-  .to(flippers, 0.5,
+  .to(flippers, 1,
     css:
       rotationX: 160
       rotationY: 20
       rotationZ: 180
-    transformStyle:"preserve-3d"
     ease: Power2.easeOut
-  , "+=0.2")
+  , "l")
+
+  back.each (index, element) ->
+    timeline.to element, 1,
+      css:
+        rotationY: 180
+    , "l"
 
   boxes.each (index, element) ->
     timeline.to element, 1,
@@ -234,5 +240,4 @@ setTimeout (->
 #     return
 
 $("#play_btn").click ->
-  animate()
-  # timeline.restart()
+  timeline.restart()
