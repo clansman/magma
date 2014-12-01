@@ -4,7 +4,7 @@ SIZE = 100
 deg = 0
 tilearray = []
 imagearray = [
-  "url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)",
+  "url(../img/FY7A4025-Edit-Edit.jpg)",
   "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)",
   "url(../img/cat-fliped.jpg)"
 ]
@@ -160,15 +160,19 @@ animate = ->
     css:
       rotationY: 30
       rotationX: 20
-      z: -150   
+      z: -100
+  , "fadeIn+=0.25"
+
+  timeline.to flippers, 0.01,
+    css:
       className: '+=animated'
-  , "z"
+  , "h"
 
   boxes.each (index, element) ->
     timeline.to element, 0.5,
       css:
         z: getRandom(-70, 70)
-    , "z"
+    , "o"
 
   timeline.to flippers, 0.8,
     css:
@@ -231,6 +235,9 @@ setTimeout (->
 
 $("#reverse_btn").click ->
   timeline.reverse()
+
+$("#pause_btn").click ->
+  timeline.pause()
 
 $("#restart_btn").click ->
   timeline.restart('z')

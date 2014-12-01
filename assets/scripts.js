@@ -10,7 +10,7 @@ deg = 0;
 
 tilearray = [];
 
-imagearray = ["url(http://indulgy.ccio.co/NB/88/JE/0fd57ce1955a2bf5f2060c83bbd9bfac.jpg)", "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)", "url(../img/cat-fliped.jpg)"];
+imagearray = ["url(../img/FY7A4025-Edit-Edit.jpg)", "url(http://s5.favim.com/orig/51/apple-steve-jobs-black-and-white-face-Favim.com-465544.jpg)", "url(../img/cat-fliped.jpg)"];
 
 setup = function() {
   var $back, $front, back, entity, flippers, front, tile, x, y, _results;
@@ -166,16 +166,20 @@ animate = function() {
     css: {
       rotationY: 30,
       rotationX: 20,
-      z: -150,
+      z: -100
+    }
+  }, "fadeIn+=0.25");
+  timeline.to(flippers, 0.01, {
+    css: {
       className: '+=animated'
     }
-  }, "z");
+  }, "h");
   boxes.each(function(index, element) {
     return timeline.to(element, 0.5, {
       css: {
         z: getRandom(-70, 70)
       }
-    }, "z");
+    }, "o");
   });
   timeline.to(flippers, 0.8, {
     css: {
@@ -212,6 +216,10 @@ setTimeout((function() {
 
 $("#reverse_btn").click(function() {
   return timeline.reverse();
+});
+
+$("#pause_btn").click(function() {
+  return timeline.pause();
 });
 
 $("#restart_btn").click(function() {
