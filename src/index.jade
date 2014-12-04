@@ -1,19 +1,24 @@
-doctype html
+<!DOCTYPE html>
 html(lang="en")
-  head
-    title="title"
-    link(rel='stylesheet', href='./assets/styles.css')
-    script(src="//localhost:35729/livereload.js")
-  body
-    #scene
-      #flippers
-    input#play_btn(type="button", value="play")
-    input#reverse_btn(type="button", value="reverse")
-    input#restart_btn(type="button", value="restart")
-    input#pause_btn(type="button", value="pause")
+head
+    meta(charset="UTF-8")
+    title Magma
+    link(rel="stylesheet", href="./assets/styles.css")
+body
+    .ice-cream
+        ul#scene
+            li.layer(data-depth="0.08")
+                .ice
+                    img(src="img/ice-scream.png", alt="")
+            li.layer(data-depth="0.15")
+                .spark.spark1
+                    img(src="img/sparks-1.png", alt="")
+            li.layer(data-depth="0.22")
+                .spark.spark2
+                    img(src="img/sparks-2.png", alt="")
+            li.layer(data-depth="0.5")
+                .spark.spark3
+                    img(src="img/sparks-3.png", alt="")
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
-    script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenMax.min.js")
-    script(src='./assets/scripts.js')
-    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/plugins/CSSPlugin.min.js")
-    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/easing/EasePack.min.js")
-    //- script(src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenLite.min.js")
+    script(src="/client/bower_components/parallax/deploy/parallax.min.js")
+    script(src="./assets/scripts.js")
