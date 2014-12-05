@@ -71,6 +71,11 @@ body {
   top: 29%;
   max-height: 31%;
 }
+.light-8 img {
+  left: 59%;
+  top: 40%;
+  max-height: 5%;
+}
 .light-9 img {
   left: 51%;
   top: 32%;
@@ -86,6 +91,16 @@ body {
   top: 24%;
   max-height: 10%;
 }
+.light-12 img {
+  left: 42%;
+  top: 18.5%;
+  max-height: 9%;
+}
+.light-13 img {
+  left: 61%;
+  top: 43%;
+  max-height: 7%;
+}
 .light-14 img {
   left: 65.8%;
   max-height: 8%;
@@ -96,13 +111,58 @@ body {
   max-height: 6%;
   top: 51%;
 }
+.light-16 img {
+  left: 61.5%;
+  max-height: 9%;
+  top: 15%;
+}
+.light-17 img {
+  left: 60%;
+  max-height: 6%;
+  top: 20%;
+}
 .light-18 img {
   left: 46%;
   top: 26%;
   max-height: 6%;
 }
-.light-12 img {
-  left: 42%;
-  top: 18.5%;
-  max-height: 9%;
+.light-19 img {
+  left: 63%;
+  max-height: 6%;
+  top: 13%;
+}
+.light-20 img {
+  left: 30%;
+  max-height: 15%;
+  top: 7%;
+}
+.light-21 img {
+  left: 23%;
+  max-height: 35%;
+  top: 0%;
+}
+.light-22 img {
+  left: 87%;
+  max-height: 23%;
+  top: 73%;
+}
+.light-23 img {
+  left: 72%;
+  max-height: 20%;
+  top: 55%;
+}
+.light-24 img {
+  left: 80%;
+  max-height: 40%;
+  top: 67%;
+}
+.light-25 img {
+  left: 70%;
+  max-height: 35%;
+  top: -3%;
+}
+.light-26 img {
+  left: 75%;
+  max-height: 25%;
+  top: -10%;
 }
