@@ -4,11 +4,12 @@ head
     meta(charset="UTF-8")
     title Magma
     link(rel="stylesheet", href="./assets/styles.css")
+    script(src="//localhost:35729/livereload.js")
 body
     .ice-cream
         .bg
           img(src="img/bg.png", alt="")
-        ul#scene
+        ul#scene(data-scalar-x="15")
             li.layer(data-depth="0.08")
                 .ice
                     img(src="img/ice-scream.png", alt="")
@@ -45,19 +46,27 @@ body
             li.layer
               .light.light-8
                 img.center(src="img/light-8.png", alt="")
-            li.layer
+            li.layer(data-depth="0.3")
               .light.light-9
                 img.center(src="img/light-9.png", alt="")
-            li.layer
+            li.layer(data-depth="0.25")
               .light.light-10
                 img.center(src="img/light-10.png", alt="")
-
+            li.layer(data-depth="0.15")
+              .light.light-12
+                img.center(src="img/light-12.png", alt="")
+            li.layer(data-depth="0.05")
+              .light.light-11
+                img.center(src="img/light-11.png", alt="")
             li.layer(data-depth="0.2")
               .light.light-14
                 img.center(src="img/light-14.png", alt="")
             li.layer(data-depth="0.25")
               .light.light-15
                 img.center(src="img/light-15.png", alt="")
+            li.layer(data-depth="0.1")
+              .light.light-18
+                img.center(src="img/light-18.png", alt="")
 
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
     script(src="./client/bower_components/parallax/deploy/parallax.min.js")

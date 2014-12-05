@@ -32,7 +32,7 @@ body {
 }
 .bg img {
   position: absolute;
-  left: 50%;
+  left: 51.5%;
   top: 50%;
   transform: translate(-50%, -50%);
   max-height: 90%;
@@ -46,8 +46,8 @@ body {
 }
 .center {
   position: absolute;
-  left: 50%;
-  top: 40%;
+  left: 0%;
+  top: 0%;
   transform: translate(-50%, -50%);
 }
 .spark img {
@@ -71,6 +71,21 @@ body {
   top: 29%;
   max-height: 31%;
 }
+.light-9 img {
+  left: 51%;
+  top: 32%;
+  max-height: 4.5%;
+}
+.light-10 img {
+  left: 49.5%;
+  top: 30.5%;
+  max-height: 4.5%;
+}
+.light-11 img {
+  left: 44%;
+  top: 24%;
+  max-height: 10%;
+}
 .light-14 img {
   left: 65.8%;
   max-height: 8%;
@@ -80,4 +95,14 @@ body {
   left: 68%;
   max-height: 6%;
   top: 51%;
+}
+.light-18 img {
+  left: 46%;
+  top: 26%;
+  max-height: 6%;
+}
+.light-12 img {
+  left: 42%;
+  top: 18.5%;
+  max-height: 9%;
 }
