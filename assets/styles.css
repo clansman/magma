@@ -7,6 +7,11 @@ body {
   height: 100%;
   overflow: hidden;
 }
+canvas {
+  display: inline-block;
+  position: absolute;
+  z-index: 10;
+}
 #scene,
 .layer {
   display: block;
@@ -52,12 +57,17 @@ body {
 }
 .center {
   position: absolute;
-  left: 0%;
-  top: 0%;
+  left: 50%;
+  top: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-border-radius: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+canvas.center {
+  top: 24%;
+  width: 22%;
+  height: 45%;
 }
 .spark img {
   position: absolute;
