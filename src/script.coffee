@@ -80,15 +80,15 @@ parallax = new Parallax scene
       @remaining_life = @life;
       @speed = 
         x: -2.5+Math.random() * 5
-        y: -3+Math.random()
+        y: -4 +Math.random()
 
     draw: ->
       @scale -= 0.00065
+      @alpha -= 0.0015
       @remaining_life -= 0.1
       @init()  if @remaining_life < 0 or @scale < 0
       @pos.y += @speed.y
       @pos.x += @speed.x
-      # @alpha -= 0.0015
       ctx.beginPath()
       ctx.arc @pos.x, @pos.y, @scale * 10, 0, 2 * Math.PI, false
       ctx.fillStyle = "rgba(254,149,0," + 0.8 + ")"

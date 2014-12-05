@@ -78,12 +78,13 @@ parallax = new Parallax(scene);
       this.remaining_life = this.life;
       return this.speed = {
         x: -2.5 + Math.random() * 5,
-        y: -3 + Math.random()
+        y: -4 + Math.random()
       };
     };
 
     Circle.prototype.draw = function() {
       this.scale -= 0.00065;
+      this.alpha -= 0.0015;
       this.remaining_life -= 0.1;
       if (this.remaining_life < 0 || this.scale < 0) {
         this.init();
