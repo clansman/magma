@@ -12,12 +12,14 @@ parallax = new Parallax scene
   target = undefined
   animateHeader = true
   
+  getRandom = (min, max) ->
+    Math.floor(Math.random() * (max - min + 1)) + min
 
   initHeader = ->
     # width = window.innerWidth
     # height = window.innerHeight
     width = 500
-    height = 200
+    height = 500
     target =
       x: 0
       y: height
@@ -33,7 +35,7 @@ parallax = new Parallax scene
     circles = []
     x = 0
 
-    while x < width * 0.07
+    while x < width * 0.04
       c = new Circle()
       circles.push c
       x++
@@ -57,11 +59,23 @@ parallax = new Parallax scene
     canvas.width = width
     canvas.height = height
 
+  firstRun = true
   animate = ->
     if animateHeader
       ctx.clearRect 0, 0, width, height
-      for i of circles
-        circles[i].draw()
+      if firstRun
+        for i of circles
+          ((i)->
+            setTimeout (->
+              circles[i].draw()
+              ), 120 * i
+            )(i)
+        setTimeout (->
+            firstRun = false
+          ), circles.length * 120
+      else
+        for i of circles
+          circles[i].draw()
     requestAnimationFrame animate
   
   class Circle
@@ -71,27 +85,28 @@ parallax = new Parallax scene
       console.log @
 
     init: ->
-      @pos.x = Math.random() * width
-      @pos.y = height + Math.random() * 500
-      @alpha = 0.1 + Math.random() * 0.3
+      @pos.x = getRandom(100, width - 100)
+      @pos.y = getRandom(200, height)
+      # @pos.x = Math.random() * width
+      # @pos.y = height + Math.random() * 300
+      @alpha = 0.1 + Math.random() * 0.9
       @scale = 0.1 + Math.random() * 0.05
-      @velocity = Math.random() * 10
       @life = 20+Math.random()*10;
       @remaining_life = @life;
       @speed = 
         x: -2.5+Math.random() * 5
-        y: -4 +Math.random()
+        y: -5 + Math.random()
 
     draw: ->
       @scale -= 0.00065
-      @alpha -= 0.0015
+      @alpha -= 0.005
       @remaining_life -= 0.1
       @init()  if @remaining_life < 0 or @scale < 0
       @pos.y += @speed.y
       @pos.x += @speed.x
       ctx.beginPath()
       ctx.arc @pos.x, @pos.y, @scale * 10, 0, 2 * Math.PI, false
-      ctx.fillStyle = "rgba(254,149,0," + 0.8 + ")"
+      ctx.fillStyle = "rgba(254,149,0," + @alpha + ")"
       ctx.fill()
 
   initHeader()
