@@ -1,22 +1,22 @@
-var Circle, addCircles, addListeners, animate, animateHeader, canvas, circles, ctx, firstRun, getRandom, height, initHeader, largeHeader, onMouseOver, parallax, resize, scene, scrollCheck, target, width, x;
+var Spark, addSparks, animate, animateHeader, canvas, ctx, getRandom, height, init, largeHeader, onMouseOver, parallax, resize, scene, sparks, target, width, x;
 
 scene = document.getElementById('scene');
 
 parallax = new Parallax(scene);
 
-width = void 0;
+width = null;
 
-height = void 0;
+height = null;
 
-largeHeader = void 0;
+largeHeader = null;
 
-canvas = void 0;
+canvas = null;
 
-ctx = void 0;
+ctx = null;
 
-circles = void 0;
+sparks = null;
 
-target = void 0;
+target = null;
 
 animateHeader = true;
 
@@ -26,7 +26,7 @@ getRandom = function(min, max) {
 
 x = 0;
 
-initHeader = function() {
+init = function() {
   width = 300;
   height = 500;
   target = {
@@ -38,21 +38,9 @@ initHeader = function() {
   canvas.height = height;
   canvas.addEventListener("mouseover", onMouseOver);
   ctx = canvas.getContext("2d");
-  circles = {};
-  addCircles();
+  sparks = {};
+  addSparks();
   return animate();
-};
-
-addListeners = function() {
-  return window.addEventListener("scroll", scrollCheck);
-};
-
-scrollCheck = function() {
-  if (document.body.scrollTop > height) {
-    return animateHeader = false;
-  } else {
-    return animateHeader = true;
-  }
 };
 
 resize = function() {
@@ -62,13 +50,13 @@ resize = function() {
   return canvas.height = height;
 };
 
-addCircles = function() {
+addSparks = function() {
   var c, count, _results;
   count = 0;
   _results = [];
   while (count < width * 0.09) {
-    c = new Circle(x);
-    circles[x] = c;
+    c = new Spark(x);
+    sparks[x] = c;
     x++;
     _results.push(count++);
   }
@@ -76,31 +64,29 @@ addCircles = function() {
 };
 
 onMouseOver = function() {
-  return addCircles();
+  return addSparks();
 };
-
-firstRun = true;
 
 animate = function() {
   var circle, i;
   if (animateHeader) {
     ctx.clearRect(0, 0, width, height);
-    for (i in circles) {
-      circle = circles[i];
+    for (i in sparks) {
+      circle = sparks[i];
       circle.draw();
     }
   }
   return requestAnimationFrame(animate);
 };
 
-Circle = (function() {
-  function Circle(id) {
+Spark = (function() {
+  function Spark(id) {
     this.id = id;
     this.pos = {};
     this.init();
   }
 
-  Circle.prototype.init = function() {
+  Spark.prototype.init = function() {
     this.pos.x = getRandom(0, width);
     this.pos.y = getRandom(200, height);
     this.alpha = 0.1 + Math.random() * 0.9;
@@ -113,12 +99,12 @@ Circle = (function() {
     };
   };
 
-  Circle.prototype.draw = function() {
+  Spark.prototype.draw = function() {
     this.scale -= 0.00065;
     this.alpha -= 0.005;
     this.remaining_life -= 0.1;
     if (this.remaining_life < 0 || this.scale < 0) {
-      delete circles[this.id];
+      delete sparks[this.id];
       return;
     }
     this.pos.y += this.speed.y;
@@ -129,10 +115,8 @@ Circle = (function() {
     return ctx.fill();
   };
 
-  return Circle;
+  return Spark;
 
 })();
 
-initHeader();
-
-addListeners();
+init();
